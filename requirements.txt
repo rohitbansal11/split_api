@@ -1,0 +1,12 @@
+pydantic==2.12.4
+fastapi
+uvicorn[standard]
+typing==3.5.0
+uvicorn==0.23.2
+sqlalchemy==2.0.20
+psycopg2-binary==2.9.7
+passlib[bcrypt]==1.7.3
+python-jose==3.3.0
+uuid == 1.30
+
+
