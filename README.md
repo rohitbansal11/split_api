@@ -107,6 +107,76 @@ test-spitwise/
    - Swagger UI: `http://localhost:8000/docs`
    - ReDoc: `http://localhost:8000/redoc`
 
+## Docker Installation
+
+### Prerequisites
+
+- Docker
+- Docker Compose
+
+### Setup with Docker Compose (Recommended)
+
+1. **Navigate to the project directory**:
+   ```bash
+   cd test-spitwise
+   ```
+
+2. **Build and run with Docker Compose**:
+   ```bash
+   docker-compose up --build
+   ```
+
+   This will:
+   - Build the application Docker image
+   - Start a PostgreSQL database container
+   - Start the FastAPI application container
+   - Automatically create database tables on startup
+
+3. **Access the application**:
+   - API: `http://localhost:8000`
+   - Swagger UI: `http://localhost:8000/docs`
+   - ReDoc: `http://localhost:8000/redoc`
+
+4. **Stop the containers**:
+   ```bash
+   docker-compose down
+   ```
+
+5. **Stop and remove volumes** (clean database):
+   ```bash
+   docker-compose down -v
+   ```
+
+### Setup with Docker only
+
+1. **Build the Docker image**:
+   ```bash
+   docker build -t test-spitwise .
+   ```
+
+2. **Run the container** (with external database):
+   ```bash
+   docker run -p 8000:8000 \
+     -e DATABASE_URL="postgresql://user:password@host:port/database" \
+     test-spitwise
+   ```
+
+   Or with a `.env` file:
+   ```bash
+   docker run -p 8000:8000 --env-file .env test-spitwise
+   ```
+
+### Environment Variables
+
+The application supports the following environment variable:
+
+- `DATABASE_URL`: PostgreSQL connection string (optional, falls back to default if not set)
+
+Example:
+```bash
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/test_spitwise
+```
+
 ## API Endpoints
 
 ### User Endpoints (`/users`)
